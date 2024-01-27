@@ -1,9 +1,9 @@
-import { NotFoundBlock } from '../components/NotFoundBlock'
+import { NotFoundBlock } from "../components/NotFoundBlock";
 
 export function NotFound() {
 	return (
-
-    
-		<NotFoundBlock/>
+		<div className="container">
+			<NotFoundBlock />
+		</div>
 	);
 }
