@@ -1,12 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Categories } from "../components/Categories";
 import { Pagination } from "../components/Pagination";
 import { PizzaBlock, Skeleton } from "../components/PizzaBlock";
 import { Sort } from "../components/Sort";
+import { MyContext } from '../App'
 
-export function Home({ searchValue }) {
+export function Home() {
+
+
+	const {searchValue} = useContext(MyContext)
+
 	const [pizzas, setPizzas] = useState({items:[], meta:{}});
 
 	const [categoryId, setCategoryId] = useState(0);
