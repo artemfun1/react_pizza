@@ -13,6 +13,7 @@ export function App() {
 
 	return (
 		<div className="wrapper">
+
 			<MyContext.Provider value={{searchValue, setSearchValue}}>
 				<Header />
 

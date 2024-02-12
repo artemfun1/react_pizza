@@ -1,10 +1,18 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { selectSortType, setSortType } from '../redux/slices/filterSlice'
 
-export function Sort({sortType, setSortType}) {
+export function Sort() {
+
 	const list = [{name:"популярности", sortProperty: 'rating' },
 	{name:"цене", sortProperty: 'price' },
 	{name:"алфавиту", sortProperty: 'title' }];
+
 	const [isVisible, setIsVisible] = useState(false);
+
+	const dispatch = useDispatch()
+
+	const sortType = useSelector(selectSortType)
 
 
 
@@ -37,7 +45,7 @@ export function Sort({sortType, setSortType}) {
 								key={i}
 								onClick={() => {
 									setIsVisible(false)
-									return setSortType(item)
+									dispatch(setSortType(item))
 								}}
 								className={sortType.sortProperty === item.sortProperty ? "active" : ""}
 							>

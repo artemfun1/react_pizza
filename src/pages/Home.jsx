@@ -5,20 +5,22 @@ import { Categories } from "../components/Categories";
 import { Pagination } from "../components/Pagination";
 import { PizzaBlock, Skeleton } from "../components/PizzaBlock";
 import { Sort } from "../components/Sort";
-import { MyContext } from '../App'
+import { MyContext } from "../App";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCategoryId, selectSortType, setCategoryId, setSortType } from "../redux/slices/filterSlice";
 
 export function Home() {
+	const { searchValue } = useContext(MyContext);
 
+	const [pizzas, setPizzas] = useState({ items: [], meta: { total_pages: 0 } });
 
-	const {searchValue} = useContext(MyContext)
+	const categoryId = useSelector(selectCategoryId);
+	const sortType = useSelector(selectSortType)
+	console.log(categoryId)
+	console.log(sortType)
+	
+const dispatch = useDispatch()
 
-	const [pizzas, setPizzas] = useState({items:[], meta:{}});
-
-	const [categoryId, setCategoryId] = useState(0);
-	const [sortType, setSortType] = useState({
-		name: "популярности",
-		sortProperty: "rating",
-	});
 	const [currentPage, setCurrentPage] = useState(1);
 
 	let urlGetPizza = `https://1a52b31e9a964140.mokky.dev/pizzas?page=${currentPage}&limit=3&sortBy=${sortType.sortProperty}&title=*${searchValue}`;
@@ -26,10 +28,8 @@ export function Home() {
 		urlGetPizza = `https://1a52b31e9a964140.mokky.dev/pizzas?page=${currentPage}&limit=3&category=${categoryId}&sortBy=${sortType.sortProperty}&title=*${searchValue}`;
 	}
 
-
-
 	const { isSuccess, isError, data, error } = useQuery({
-		queryKey: ["pizzas", categoryId, sortType, searchValue,currentPage],
+		queryKey: ["pizzas", categoryId, sortType, searchValue, currentPage],
 		queryFn: async () => {
 			const res = await axios.get(urlGetPizza);
 			return res.data;
@@ -39,7 +39,6 @@ export function Home() {
 	useEffect(() => {
 		if (isSuccess) {
 			setPizzas(data);
-			console.log(data)
 		}
 		if (isError) {
 			console.log("Ошибка в получении данных", error);
@@ -54,17 +53,14 @@ export function Home() {
 	return (
 		<div className="container">
 			<div className="content__top">
-				<Categories
-					categoryId={categoryId}
-					setCategoryId={i => setCategoryId(i)}
-				/>
-				<Sort sortType={sortType} setSortType={i => setSortType(i)} />
+				<Categories  />
+				<Sort />
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">
 				{isSuccess ? resultPizza : skeletons}
 			</div>
-			<Pagination pizzas={pizzas} setCurrentPage={(i)=>setCurrentPage(i)} />
+			<Pagination pizzas={pizzas} setCurrentPage={i => setCurrentPage(i)} />
 		</div>
 	);
 }
