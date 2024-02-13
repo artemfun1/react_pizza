@@ -1,11 +1,31 @@
-import { useContext } from 'react'
+import debounce from "lodash.debounce";
+import { useCallback, useContext, useEffect, useState } from "react";
+
 import style from "./search.module.scss";
-import { MyContext } from '../../App'
+import { setSearchValue } from '../../redux/slices/filterSlice'
+import { useDispatch } from 'react-redux'
 
 export function Search() {
+	const dispatch = useDispatch()
 
-	const {searchValue,setSearchValue} = useContext(MyContext)
+	const [value, setValue] = useState("");
 
+	
+
+
+
+
+	const setDebounceValue = useCallback(
+		debounce((e) => {
+		dispatch(setSearchValue(e))
+
+	}, 1000),[])
+	
+
+	const onChangeInput = event => {
+		setValue(event.target.value);
+		setDebounceValue(event.target.value);
+	};
 
 	return (
 		<div className={style.root}>
@@ -21,9 +41,12 @@ export function Search() {
 				<path d="M874.661252 952.874079c-22.128997 0-42.911322-8.597819-58.558697-24.231891L593.338005 705.863313c-17.278525-17.278525-22.965038-38.625716-16.024975-60.135612 5.647627-17.494443 18.909675-32.263821 29.825282-43.154869 16.173354-16.173354 36.077683-32.722262 61.024865-32.722262 10.660804 0 26.643823 3.287883 42.264593 18.920932l222.777853 222.751247c15.634072 15.661701 24.245194 36.443004 24.245194 58.572 0 22.103414-8.611122 42.913369-24.245194 58.546418C917.559271 944.276261 896.777969 952.874079 874.661252 952.874079zM629.631606 663.626349c0.081864 0 0.809435 1.293459 2.736321 3.208065l222.76455 222.776829c10.41828 10.404977 28.626991 10.404977 39.043225 0 5.202489-5.228071 8.072863-12.155854 8.072863-19.514449 0-7.385201-2.870374-14.31196-8.086166-19.541055l-222.76455-222.753293c-1.953492-1.966795-3.261277-2.694365-3.597945-2.801812-0.201591 0.107447-5.875824 0.835018-21.63167 16.603143-15.754822 15.741519-16.508999 21.429055-16.549931 22.022573C629.631606 663.626349 629.631606 663.626349 629.631606 663.626349z" />
 			</svg>
 
-			<input onChange={e=>setSearchValue(e.target.value)} value={searchValue} className={style.input} placeholder="Поиск пиццы..." />
+			<input
+				onChange={e => onChangeInput(e)}
+				value={value}
+				className={style.input}
+				placeholder="Поиск пиццы..."
+			/>
 		</div>
 	);
 }
-
-

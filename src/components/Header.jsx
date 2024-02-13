@@ -1,12 +1,22 @@
 import { Link } from 'react-router-dom'
 import logoSvg from '../assets/img/pizza-logo.svg'
 import { Search } from './Search'
+import { useDispatch } from 'react-redux'
+import { setSearchValue } from '../redux/slices/filterSlice'
 
 export function Header() {
+
+const dispatch= useDispatch()
+
+function handleClick(){
+	dispatch(setSearchValue(''))
+	
+}
+
 	return (
 		<div className="header">
 			<div className="container">
-				<Link to='/'><div className="header__logo">
+				<Link to='/'><div onClick={()=>handleClick()} className="header__logo">
 					<img width="38" src={logoSvg} alt="Pizza logo" />
 					<div>
 						<h1>React Pizza</h1>
