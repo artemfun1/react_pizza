@@ -10,19 +10,26 @@ const dispatch= useDispatch()
 
 function handleClick(){
 	dispatch(setSearchValue(''))
+	window.location.reload()
+	
 	
 }
 
 	return (
 		<div className="header">
 			<div className="container">
-				<Link to='/'><div onClick={()=>handleClick()} className="header__logo">
+				<Link to='/'>
+
+						{/* <a href='http://localhost:3000/'> */}
+					<div onClick={()=>handleClick()} className="header__logo">
 					<img width="38" src={logoSvg} alt="Pizza logo" />
 					<div>
 						<h1>React Pizza</h1>
 						<p>самая вкусная пицца во вселенной</p>
 					</div>
-				</div></Link>
+				</div>
+{/* </a> */}
+				</Link>
 
 
 				<Search />

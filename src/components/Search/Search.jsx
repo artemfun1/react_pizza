@@ -1,26 +1,22 @@
 import debounce from "lodash.debounce";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
+import { useDispatch } from "react-redux";
+import { setSearchValue } from "../../redux/slices/filterSlice";
 import style from "./search.module.scss";
-import { setSearchValue } from '../../redux/slices/filterSlice'
-import { useDispatch } from 'react-redux'
 
 export function Search() {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
 	const [value, setValue] = useState("");
 
-	
-
-
-
-
-	const setDebounceValue = useCallback(
-		debounce((e) => {
-		dispatch(setSearchValue(e))
-
-	}, 1000),[])
-	
+	const setDebounceValue = useMemo(
+		() =>
+			debounce(e => {
+				dispatch(setSearchValue(e));
+			}, 1000),
+		[dispatch]
+	);
 
 	const onChangeInput = event => {
 		setValue(event.target.value);
