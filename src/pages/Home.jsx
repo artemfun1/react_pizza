@@ -16,7 +16,7 @@ import {
 import { selectPizzas, setPizzas } from "../redux/slices/pizzaSlice";
 
 export function Home() {
-	// console.log(window.location.href)
+
 
 	const isSearch = useRef(false);
 	const isMounted = useRef(false);
@@ -29,10 +29,7 @@ export function Home() {
 	const currentPage = useSelector(selectCurrentPage);
 	const searchValue = useSelector(selectSearchValue);
 
-	// const fetchPizza = useCallback(() => {
-
-	// }, [dispatch, categoryId,sortType.sortProperty,currentPage,searchValue]);
-useEffect(() => {
+	useEffect(() => {
 		if (isMounted.current) {
 			const queryString = qs.stringify({
 				sortProperty: sortType.sortProperty,
@@ -41,38 +38,29 @@ useEffect(() => {
 			});
 			navigate(`?${queryString}`);
 		}
-
 		isMounted.current = true;
 	}, [sortType.sortProperty, categoryId, currentPage, navigate]);
 
-	
 	useEffect(() => {
 		if (window.location.search) {
 			const params = qs.parse(window.location.search.substring(1));
-
 			dispatch(setFiltersUserLink(params));
 			isSearch.current = true;
 		}
 	}, [dispatch]);
 
-	
-
-
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		if (!isSearch.current) {
-
-			let urlGetPizza = `https://1a52b31e9a964140.mokky.dev/pizzas?page=${currentPage}&limit=3&sortBy=${sortType.sortProperty}&title=*${searchValue}`;
+			let urlGetPizza = `https://1a52b31e9a964140.mokky.dev/pizzas?page=${currentPage}&limit=4&sortBy=${sortType.sortProperty}&title=*${searchValue}`;
 			if (categoryId > 0) {
-				urlGetPizza = `https://1a52b31e9a964140.mokky.dev/pizzas?page=${currentPage}&limit=3&category=${categoryId}&sortBy=${sortType.sortProperty}&title=*${searchValue}`;
+				urlGetPizza = `https://1a52b31e9a964140.mokky.dev/pizzas?page=${currentPage}&limit=4&category=${categoryId}&sortBy=${sortType.sortProperty}&title=*${searchValue}`;
 			}
 
 			dispatch(setPizzas(urlGetPizza));
 		}
 		isSearch.current = false;
 	}, [dispatch, categoryId, sortType.sortProperty, currentPage, searchValue]);
-
-
 
 	const pizzas = useSelector(selectPizzas);
 

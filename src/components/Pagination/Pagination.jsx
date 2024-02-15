@@ -22,7 +22,7 @@ export function Pagination() {
 				breakLabel="..."
 				nextLabel=">"
 				onPageChange={e => dispatch(setCurrentPage(e.selected+1))}
-				pageRangeDisplayed={pizzas.meta.per_page}
+				pageRangeDisplayed={pizzas.meta}
 				pageCount={pizzas.meta.total_pages}
 				previousLabel="<"
 				renderOnZeroPageCount={null}

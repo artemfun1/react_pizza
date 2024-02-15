@@ -1,43 +1,41 @@
-import { Link } from 'react-router-dom'
-import logoSvg from '../assets/img/pizza-logo.svg'
-import { Search } from './Search'
-import { useDispatch } from 'react-redux'
-import { setSearchValue } from '../redux/slices/filterSlice'
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import logoSvg from "../assets/img/pizza-logo.svg";
+import { selectCartItems } from "../redux/slices/cartSlice";
+import { setSearchValue } from "../redux/slices/filterSlice";
+import { Search } from "./Search";
 
 export function Header() {
+	const { items, totalPrice } = useSelector(selectCartItems);
 
-const dispatch= useDispatch()
+	const dispatch = useDispatch();
 
-function handleClick(){
-	dispatch(setSearchValue(''))
-	window.location.reload()
-	
-	
-}
+	function handleClick() {
+		dispatch(setSearchValue(""));
+	}
+
+	const pizzaCountInCart=items.reduce((acc,obj)=>{return obj.count+acc},0)
 
 	return (
 		<div className="header">
 			<div className="container">
-				<Link to='/'>
-
-						{/* <a href='http://localhost:3000/'> */}
-					<div onClick={()=>handleClick()} className="header__logo">
-					<img width="38" src={logoSvg} alt="Pizza logo" />
-					<div>
-						<h1>React Pizza</h1>
-						<p>самая вкусная пицца во вселенной</p>
+				<Link to="/">
+					{/* <a href='http://localhost:3000/'> */}
+					<div onClick={() => handleClick()} className="header__logo">
+						<img width="38" src={logoSvg} alt="Pizza logo" />
+						<div>
+							<h1>React Pizza</h1>
+							<p>самая вкусная пицца во вселенной</p>
+						</div>
 					</div>
-				</div>
-{/* </a> */}
+					{/* </a> */}
 				</Link>
 
-
 				<Search />
-				
 
 				<div className="header__cart">
-					<Link to='cart' href="/cart.html" className="button button--cart">
-						<span>520 ₽</span>
+					<Link to="/cart" className="button button--cart">
+						<span>{totalPrice} ₽</span>
 						<div className="button__delimiter"></div>
 						<svg
 							width="18"
@@ -68,7 +66,7 @@ function handleClick(){
 								strokeLinejoin="round"
 							/>
 						</svg>
-						<span>3</span>
+						<span>{pizzaCountInCart}</span>
 					</Link>
 				</div>
 			</div>
