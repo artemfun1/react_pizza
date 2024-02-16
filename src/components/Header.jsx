@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logoSvg from "../assets/img/pizza-logo.svg";
 import { selectCartItems } from "../redux/slices/cartSlice";
 import { setSearchValue } from "../redux/slices/filterSlice";
@@ -14,7 +14,12 @@ export function Header() {
 		dispatch(setSearchValue(""));
 	}
 
-	const pizzaCountInCart=items.reduce((acc,obj)=>{return obj.count+acc},0)
+	const pizzaCountInCart = items.reduce((acc, obj) => {
+		return obj.count + acc;
+	}, 0);
+
+	const pathname = useLocation().pathname
+
 
 	return (
 		<div className="header">
@@ -31,9 +36,12 @@ export function Header() {
 					{/* </a> */}
 				</Link>
 
-				<Search />
+			
 
-				<div className="header__cart">
+				{pathname !== '/cart' && (
+					<>
+					<Search />
+					<div className="header__cart">
 					<Link to="/cart" className="button button--cart">
 						<span>{totalPrice} ₽</span>
 						<div className="button__delimiter"></div>
@@ -69,6 +77,13 @@ export function Header() {
 						<span>{pizzaCountInCart}</span>
 					</Link>
 				</div>
+					
+					</>
+						
+				)
+				 }
+
+				
 			</div>
 		</div>
 	);

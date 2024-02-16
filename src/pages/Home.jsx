@@ -1,7 +1,7 @@
 import qs from "qs";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Categories } from "../components/Categories";
 import { Pagination } from "../components/Pagination";
 import { PizzaBlock, Skeleton } from "../components/PizzaBlock";
@@ -16,7 +16,6 @@ import {
 import { selectPizzas, setPizzas } from "../redux/slices/pizzaSlice";
 
 export function Home() {
-
 
 	const isSearch = useRef(false);
 	const isMounted = useRef(false);

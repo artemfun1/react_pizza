@@ -19,16 +19,21 @@ export const pizzaSlice = createSliceWithThunks({
 	},
 	reducers: create => ({
 		setPizzas: create.asyncThunk(
-			async urlGetPizza => {
+			async (urlGetPizza) => {
 				const res = await axios.get(urlGetPizza);
+				
 				return res.data;
-			},
+
+			}, 
 			{
 				pending: state => {
 					state.isSuccess = false;
+					state.items =[]
 				},
-				rejected: "",
-				fulfilled: (state, action) => {
+				rejected: (state)=>{
+					state.items =[]
+				},
+				fulfilled: (state, action,thunkApi) => {
 					state.items = [...action.payload.items];
 					state.isSuccess = true;
 				},
