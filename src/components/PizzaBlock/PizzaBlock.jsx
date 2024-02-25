@@ -1,8 +1,9 @@
 
 import { useState } from "react";
-import { useDispatch, useSelector } from 'react-redux'
+
 import { putItemInCart} from '../../redux/slices/cartSlice'
 import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../redux/hookRTK'
 
 
 	const typesName = ["тонкое", "традиционное"];
@@ -22,8 +23,8 @@ export function PizzaBlock({
 
 	const [activeType, setActiveType] = useState(0);
 	const [activeSize, setActiveSize] = useState(0);
-	const cartItem = useSelector(state=>state.cart.items.find(obj=>obj.id===id))
-	const dispatch = useDispatch()
+	const cartItem = useAppSelector(state=>state.cart.items.find(obj=>obj.id===id))
+	const dispatch = useAppDispatch()
 
 	const addedCount = cartItem?.count ? cartItem.count : 0 
 
@@ -40,6 +41,7 @@ export function PizzaBlock({
 			type:typesName[activeType],
 			size:sizes[activeSize]
 		}
+
 		dispatch(putItemInCart(item))
 
 	}

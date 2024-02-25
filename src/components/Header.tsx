@@ -1,20 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
+
 import { Link, useLocation } from "react-router-dom";
 import logoSvg from "../assets/img/pizza-logo.svg";
 import { selectCartItems } from "../redux/slices/cartSlice";
 import { setSearchValue } from "../redux/slices/filterSlice";
 import { Search } from "./Search";
+import { useAppDispatch, useAppSelector } from '../redux/hookRTK'
 
 export function Header() {
-	const { items, totalPrice } = useSelector(selectCartItems);
+	const { items, totalPrice } = useAppSelector(selectCartItems);
+	console.log(items)
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	function handleClick() {
 		dispatch(setSearchValue(""));
 	}
 
 	const pizzaCountInCart = items.reduce((acc, obj) => {
+		// console.log(obj)
+		// return 1 + acc;
 		return obj.count + acc;
 	}, 0);
 

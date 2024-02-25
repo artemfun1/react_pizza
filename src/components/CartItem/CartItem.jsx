@@ -1,23 +1,23 @@
-import { useDispatch } from "react-redux";
-import { putItemInCart, removeItemInCart } from "../../redux/slices/cartSlice";
+import { countMinusItemInCart, countPlusItemInCart, removeItemInCart } from "../../redux/slices/cartSlice";
+import { useAppDispatch } from '../../redux/hookRTK'
 
 export const CartItem = ({ imageUrl, title, type, size, count, price, id }) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const onClickPlus = () => {
 		dispatch(
-			putItemInCart({
+			countPlusItemInCart({
 				id,
-				plus: 1,
+		
 			})
 		);
 	};
 
 	const onClickMinus = () => {
 		dispatch(
-			putItemInCart({
+			countMinusItemInCart({
 				id,
-				minus: 1,
+	
 			})
 		);
 	};

@@ -2,8 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-export const FillPizza = () => {
-	const [pizza, setPizza] = useState(undefined);
+export const FillPizza: React.FC = () => {
+	const [pizza, setPizza] = useState<{
+		imageUrl:string,
+		title:string,
+		price:string
+	}>();
 
 	const navigate = useNavigate();
 
@@ -28,11 +32,11 @@ export const FillPizza = () => {
 	if (!pizza) {
 		return <h2>Loading...</h2>;
 	}
-	const { imageUrl, title, price } = pizza;
+	const { price } = pizza;
 	return (
 		<div className="container">
-			<img style={{ height: "200px" }} src={imageUrl} alt="pizza" />
-			<p>{title}</p>
+			<img style={{ height: "200px" }} src={pizza.imageUrl} alt="pizza" />
+			<p>{pizza.title}</p>
 			<h4>{price} p</h4>
 		</div>
 	);
