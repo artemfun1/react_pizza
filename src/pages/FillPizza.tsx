@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const FillPizza: React.FC = () => {
 	const [pizza, setPizza] = useState<{
-		imageUrl:string,
-		title:string,
-		price:string
+		imageUrl: string;
+		title: string;
+		price: string;
 	}>();
 
 	const navigate = useNavigate();
@@ -23,11 +23,11 @@ export const FillPizza: React.FC = () => {
 				setPizza(response.data[0]);
 			} catch (error) {
 				alert("Ошибка при получении питсы");
-				navigate('/');
+				navigate("/");
 			}
 		}
 		getPizza();
-	}, [urlPizzaId,navigate]);
+	}, [urlPizzaId, navigate]);
 
 	if (!pizza) {
 		return <h2>Loading...</h2>;

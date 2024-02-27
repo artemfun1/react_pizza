@@ -1,11 +1,11 @@
-import { selectCategoryId, setCategoryId } from '../redux/slices/filterSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from "../redux/hookRTK";
+import { selectCategoryId, setCategoryId } from "../redux/slices/filterSlice";
 
 export function Categories() {
 	// const [activeIndex, setActiveIndex] = useState(0);
 
-	const dispatch = useDispatch()
-	const categoryId = useSelector(selectCategoryId)
+	const dispatch = useAppDispatch();
+	const categoryId = useAppSelector(selectCategoryId);
 
 	const categories = [
 		"Все",
@@ -15,10 +15,6 @@ export function Categories() {
 		"Острые",
 		"Закрытые",
 	];
-
-	// function onClickCategory(index) {
-	// 	setActiveIndex(index);
-	// }
 
 	return (
 		<div className="categories">

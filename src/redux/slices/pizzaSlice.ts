@@ -42,7 +42,7 @@ export const pizzaSlice = createSliceWithThunks({
 	},
 	reducers: create => ({
 		setPizzas: create.asyncThunk(
-			async (action:string) => {
+			async (action: string) => {
 				const res = await axios.get(action);
 
 				return res.data;

@@ -1,11 +1,12 @@
 import qs from "qs";
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Categories } from "../components/Categories";
-import { Pagination } from "../components/Pagination";
+
 import { PizzaBlock, Skeleton } from "../components/PizzaBlock";
 import { Sort } from "../components/Sort";
+import { useAppDispatch } from "../redux/hookRTK";
 import {
 	selectCategoryId,
 	selectCurrentPage,
@@ -14,14 +15,14 @@ import {
 	setFiltersUserLink,
 } from "../redux/slices/filterSlice";
 import { selectPizzas, setPizzas } from "../redux/slices/pizzaSlice";
+import { Pagination } from '../components/Pagination'
 
 export function Home() {
-
 	const isSearch = useRef(false);
 	const isMounted = useRef(false);
 
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const categoryId = useSelector(selectCategoryId);
 	const sortType = useSelector(selectSortType);
@@ -43,6 +44,7 @@ export function Home() {
 	useEffect(() => {
 		if (window.location.search) {
 			const params = qs.parse(window.location.search.substring(1));
+
 			dispatch(setFiltersUserLink(params));
 			isSearch.current = true;
 		}

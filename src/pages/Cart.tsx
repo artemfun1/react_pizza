@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { CartEmpty } from "../components/CartEmpty";
 import { CartItem } from "../components/CartItem";
+import { useAppDispatch, useAppSelector } from "../redux/hookRTK";
 import { clearItemInCart, selectCartItems } from "../redux/slices/cartSlice";
-import { CartEmpty } from '../components/CartEmpty'
 
 export function Cart() {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
-	const { items, totalPrice } = useSelector(selectCartItems);
+	const { items, totalPrice } = useAppSelector(selectCartItems);
 
 	const pizzaCountInCart = items.reduce((acc, obj) => {
 		return obj.count + acc;
@@ -15,14 +15,13 @@ export function Cart() {
 
 	function handleClearCart() {
 		if (window.confirm("Удалить все из корзины?")) {
-			dispatch(clearItemInCart());
+			dispatch(clearItemInCart(""));
+			//WTF
 		}
 	}
 
-	if(items.length===0){
-		return (
-			<CartEmpty/>
-		)
+	if (items.length === 0) {
+		return <CartEmpty />;
 	}
 
 	return (

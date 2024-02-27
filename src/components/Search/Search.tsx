@@ -1,12 +1,11 @@
 import debounce from "lodash.debounce";
 import { useMemo, useState } from "react";
-
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../redux/hookRTK";
 import { setSearchValue } from "../../redux/slices/filterSlice";
 import style from "./search.module.scss";
 
 export function Search() {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const [value, setValue] = useState("");
 
@@ -18,9 +17,9 @@ export function Search() {
 		[dispatch]
 	);
 
-	const onChangeInput = event => {
-		setValue(event.target.value);
-		setDebounceValue(event.target.value);
+	const onChangeInput = (event: Event) => {
+		setValue((event.target as HTMLInputElement).value);
+		setDebounceValue((event.target as HTMLInputElement).value);
 	};
 
 	return (
@@ -38,7 +37,7 @@ export function Search() {
 			</svg>
 
 			<input
-				onChange={e => onChangeInput(e)}
+				onChange={(e: any) => onChangeInput(e)}
 				value={value}
 				className={style.input}
 				placeholder="Поиск пиццы..."

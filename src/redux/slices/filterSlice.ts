@@ -31,12 +31,12 @@ export const filterSlice = createSliceWithThunks({
 				return action;
 			},
 			{
-				pending: "",
-				rejected: "",
+				pending: () => {},
+				rejected: () => {},
 				fulfilled: (state, action) => {
 					state.categoryId = action.payload;
 				},
-				settled: "",
+				settled: () => {},
 			}
 		),
 		setSortType: create.asyncThunk(
@@ -44,12 +44,12 @@ export const filterSlice = createSliceWithThunks({
 				return action;
 			},
 			{
-				pending: "",
-				rejected: "",
+				pending: () => {},
+				rejected: () => {},
 				fulfilled: (state, action) => {
 					state.sort = action.payload;
 				},
-				settled: "",
+				settled: () => {},
 			}
 		),
 		setCurrentPage: create.asyncThunk(
@@ -57,12 +57,12 @@ export const filterSlice = createSliceWithThunks({
 				return action;
 			},
 			{
-				pending: "",
-				rejected: "",
+				pending: () => {},
+				rejected: () => {},
 				fulfilled: (state, action) => {
 					state.currentPage = action.payload;
 				},
-				settled: "",
+				settled: () => {},
 			}
 		),
 		setSearchValue: create.asyncThunk(
@@ -70,12 +70,12 @@ export const filterSlice = createSliceWithThunks({
 				return action;
 			},
 			{
-				pending: "",
-				rejected: "",
+				pending: () => {},
+				rejected: () => {},
 				fulfilled: (state, action) => {
 					state.searchValue = action.payload;
 				},
-				settled: "",
+				settled: () => {},
 			}
 		),
 		setFiltersUserLink: create.asyncThunk(
@@ -83,17 +83,17 @@ export const filterSlice = createSliceWithThunks({
 				return action;
 			},
 			{
-				pending: "",
-				rejected: "",
+				pending: () => {},
+				rejected: () => {},
 				fulfilled: (state, action) => {
 					state.sort.name = sortList.find(
 						item => item.sortProperty === action.payload.sortProperty
-					).name;
+					)!.name;
 					state.sort.sortProperty = action.payload.sortProperty;
 					state.categoryId = +action.payload.categoryId;
 					state.currentPage = +action.payload.currentPage;
 				},
-				settled: "",
+				settled: () => {},
 			}
 		),
 	}),

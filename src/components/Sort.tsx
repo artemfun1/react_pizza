@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../redux/hookRTK";
 import { selectSortType, setSortType } from "../redux/slices/filterSlice";
 
 export const sortList = [
@@ -10,17 +10,16 @@ export const sortList = [
 export function Sort() {
 	const [isVisible, setIsVisible] = useState(false);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
-	const sortType = useSelector(selectSortType);
+	const sortType = useAppSelector(selectSortType);
 
 	const sortRef = useRef(null);
 
 	useEffect(() => {
-		const handleClickOutside = event => {
-			if (!event.target.closest(".sort")) {
+		const handleClickOutside = (event: Event) => {
+			if (!(event.target as HTMLElement).closest(".sort")) {
 				setIsVisible(false);
-
 			}
 		};
 

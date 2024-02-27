@@ -1,8 +1,4 @@
-import {
-	PayloadAction,
-	asyncThunkCreator,
-	buildCreateSlice,
-} from "@reduxjs/toolkit";
+import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
 import { IPizzaItem } from "./pizzaSlice";
 
 const createSliceWithThunks = buildCreateSlice({
@@ -12,15 +8,6 @@ const createSliceWithThunks = buildCreateSlice({
 interface ICartItem {
 	items: IPizzaItem[];
 	totalPrice: number;
-}
-
-interface IAddCartItem{
-	id: number
-  imageUrl: string
-  price: number
-  size: number | number[]
-  title: string
-  type: string | string[]
 }
 
 const initialState: ICartItem = {
@@ -36,13 +23,13 @@ export const cartSlice = createSliceWithThunks({
 	},
 	reducers: create => ({
 		putItemInCart: create.asyncThunk(
-			async (action: PayloadAction<IPizzaItem>) => {
+			async action => {
 				return action;
 			},
 			{
 				pending: () => {},
 				rejected: () => {},
-				fulfilled: (state: ICartItem, action: PayloadAction<any>) => {
+				fulfilled: (state: ICartItem, action) => {
 					console.log(action.payload);
 					const findItem = state.items.find(
 						obj => obj.id === action.payload.id
@@ -62,30 +49,20 @@ export const cartSlice = createSliceWithThunks({
 			}
 		),
 		countMinusItemInCart: create.asyncThunk(
-			async (action: PayloadAction<{ id: number }>) => {
+			async action => {
 				return action;
 			},
 			{
 				pending: () => {},
 				rejected: () => {},
-				fulfilled: (
-					state: ICartItem,
-					action: PayloadAction<{
-						payload: {
-							id: number;
-						};
-						type: string;
-					}>
-				) => {
-					const findItem = state.items.find(
-						obj => obj.id === action.payload.payload.id
-					);
+				fulfilled: (state: ICartItem, action) => {
+					const findItem = state.items.find(obj => obj.id === action.payload);
 					if (findItem) {
 						findItem.count--;
 
 						if (findItem.count === 0) {
 							state.items = state.items.filter(
-								obj => obj.id !== action.payload.payload.id
+								obj => obj.id !== action.payload
 							);
 						}
 					}
@@ -99,24 +76,14 @@ export const cartSlice = createSliceWithThunks({
 			}
 		),
 		countPlusItemInCart: create.asyncThunk(
-			async (action: PayloadAction<{ id: number }>) => {
+			async action => {
 				return action;
 			},
 			{
 				pending: () => {},
 				rejected: () => {},
-				fulfilled: (
-					state,
-					action: PayloadAction<{
-						payload: {
-							id: number;
-						};
-						type: string;
-					}>
-				) => {
-					const findItem = state.items.find(
-						obj => obj.id === action.payload.payload.id
-					);
+				fulfilled: (state, action) => {
+					const findItem = state.items.find(obj => obj.id === action.payload);
 					if (findItem) {
 						findItem.count++;
 					}
@@ -130,16 +97,14 @@ export const cartSlice = createSliceWithThunks({
 			}
 		),
 		removeItemInCart: create.asyncThunk(
-			async (action: PayloadAction<number>) => {
+			async action => {
 				return action;
 			},
 			{
 				pending: () => {},
 				rejected: () => {},
 				fulfilled: (state, action) => {
-					state.items = state.items.filter(
-						obj => obj.id !== action.payload.payload
-					);
+					state.items = state.items.filter(obj => obj.id !== action.payload);
 					state.totalPrice = state.items.reduce(
 						(acc, item) => item.price * item.count + acc,
 						0

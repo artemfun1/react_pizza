@@ -1,33 +1,39 @@
-import { countMinusItemInCart, countPlusItemInCart, removeItemInCart } from "../../redux/slices/cartSlice";
-import { useAppDispatch } from '../../redux/hookRTK'
+import { useAppDispatch } from "../../redux/hookRTK";
+import {
+	countMinusItemInCart,
+	countPlusItemInCart,
+	removeItemInCart,
+} from "../../redux/slices/cartSlice";
+import { IPizzaItem } from "../../redux/slices/pizzaSlice";
 
-export const CartItem = ({ imageUrl, title, type, size, count, price, id }) => {
+// interface IProps{
+// 	{IPizzaItem}
+// }
+
+export const CartItem = ({
+	imageUrl,
+	title,
+	types,
+	sizes,
+	count,
+	price,
+	id,
+}: IPizzaItem) => {
 	const dispatch = useAppDispatch();
 
 	const onClickPlus = () => {
-		dispatch(
-			countPlusItemInCart({
-				id,
-		
-			})
-		);
+		dispatch(countPlusItemInCart(id));
 	};
 
 	const onClickMinus = () => {
-		dispatch(
-			countMinusItemInCart({
-				id,
-	
-			})
-		);
+		dispatch(countMinusItemInCart(id));
 	};
 
-  function onRemoveItem(){
-    if(window.confirm('точно удалить эту пиццу из корзины?')){
-      dispatch(removeItemInCart(id))
-    }
-
-  }
+	function onRemoveItem() {
+		if (window.confirm("точно удалить эту пиццу из корзины?")) {
+			dispatch(removeItemInCart(id));
+		}
+	}
 
 	return (
 		<div className="cart__item">
@@ -37,7 +43,7 @@ export const CartItem = ({ imageUrl, title, type, size, count, price, id }) => {
 			<div className="cart__item-info">
 				<h3>{title}</h3>
 				<p>
-					{type} тесто, {size} см.
+					{types} тесто, {sizes} см.
 				</p>
 			</div>
 			<div className="cart__item-count">
@@ -84,13 +90,15 @@ export const CartItem = ({ imageUrl, title, type, size, count, price, id }) => {
 						></path>
 					</svg>
 				</div>
-
 			</div>
 			<div className="cart__item-price">
 				<b>{price * count} ₽</b>
 			</div>
 			<div className="cart__item-remove">
-				<div onClick={onRemoveItem} className="button button--outline button--circle">
+				<div
+					onClick={onRemoveItem}
+					className="button button--outline button--circle"
+				>
 					<svg
 						width="10"
 						height="10"
