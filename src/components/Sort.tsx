@@ -17,6 +17,7 @@ export function Sort() {
 	const sortRef = useRef(null);
 
 	useEffect(() => {
+		
 		const handleClickOutside = (event: Event) => {
 			if (!(event.target as HTMLElement).closest(".sort")) {
 				setIsVisible(false);
