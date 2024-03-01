@@ -17,9 +17,9 @@ export function Search() {
 		[dispatch]
 	);
 
-	const onChangeInput = (event: Event) => {
-		setValue((event.target as HTMLInputElement).value);
-		setDebounceValue((event.target as HTMLInputElement).value);
+	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setValue(event.target.value);
+		setDebounceValue(event.target.value);
 	};
 
 	return (
