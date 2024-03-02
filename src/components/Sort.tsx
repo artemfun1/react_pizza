@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hookRTK";
 import { selectSortType, setSortType } from "../redux/slices/filterSlice";
 
@@ -18,7 +18,7 @@ export function Sort() {
 
 	useEffect(() => {
 		
-		const handleClickOutside = (event: Event) => {
+		const handleClickOutside = (event: MouseEvent) => {
 			if (!(event.target as HTMLElement).closest(".sort")) {
 				setIsVisible(false);
 			}
