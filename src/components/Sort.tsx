@@ -7,7 +7,7 @@ export const sortList = [
 	{ name: "цене", sortProperty: "price" },
 	{ name: "алфавиту", sortProperty: "title" },
 ];
-export function Sort() {
+export const Sort = React.memo(()=> {
 	const [isVisible, setIsVisible] = useState(false);
 
 	const dispatch = useAppDispatch();
@@ -73,3 +73,4 @@ export function Sort() {
 		</div>
 	);
 }
+)

@@ -1,5 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice } from "@reduxjs/toolkit";
 import { IPizzaItem } from "./pizzaSlice";
+import { getCartItemFromLocalStorage, getPrice } from '../../utils/getCartItemFromLocalStorage'
 
 const createSliceWithThunks = buildCreateSlice({
 	creators: { asyncThunk: asyncThunkCreator },
@@ -11,8 +12,8 @@ interface ICartItem {
 }
 
 const initialState: ICartItem = {
-	items: [],
-	totalPrice: 0,
+	items: getCartItemFromLocalStorage(),
+	totalPrice: getPrice() ,
 };
 
 export const cartSlice = createSliceWithThunks({

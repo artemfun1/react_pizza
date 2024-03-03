@@ -41,7 +41,7 @@ export function Search() {
 				value={value}
 				className={style.input}
 				placeholder="Поиск пиццы..."
-			/>
+			/> 
 		</div>
 	);
 }

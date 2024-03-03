@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Categories } from "../components/Categories";
 
+import { Pagination } from "../components/Pagination";
 import { PizzaBlock, Skeleton } from "../components/PizzaBlock";
 import { Sort } from "../components/Sort";
 import { useAppDispatch } from "../redux/hookRTK";
@@ -15,7 +16,6 @@ import {
 	setFiltersUserLink,
 } from "../redux/slices/filterSlice";
 import { selectPizzas, setPizzas } from "../redux/slices/pizzaSlice";
-import { Pagination } from '../components/Pagination'
 
 export function Home() {
 	const isSearch = useRef(false);
@@ -68,6 +68,11 @@ export function Home() {
 	const resultPizza = pizzas.items.map(i => <PizzaBlock key={i.id} {...i} />);
 
 	const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
+
+	// const CategoriesMemo = () =>
+	// 	useMemo(() => {
+	// 		return <Categories />;
+	// 	},[]);
 
 	return (
 		<div className="container">

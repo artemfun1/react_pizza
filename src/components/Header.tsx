@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hookRTK";
 import { selectCartItems } from "../redux/slices/cartSlice";
 import { setSearchValue } from "../redux/slices/filterSlice";
 import { Search } from "./Search";
+import { useEffect, useRef } from "react";
 
 export function Header() {
 	const { items, totalPrice } = useAppSelector(selectCartItems);
@@ -19,6 +20,16 @@ export function Header() {
 	}, 0);
 
 	const pathname = useLocation().pathname;
+
+	const isMounted = useRef(false);
+
+	useEffect(() => {
+		if ( isMounted) {
+			const json = JSON.stringify(items);
+			localStorage.setItem("cart", json);
+		}
+		isMounted.current = true;
+	}, [items]);
 
 	return (
 		<div className="header">

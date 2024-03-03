@@ -1,9 +1,8 @@
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hookRTK";
 import { selectCategoryId, setCategoryId } from "../redux/slices/filterSlice";
 
-export function Categories() {
-	// const [activeIndex, setActiveIndex] = useState(0);
-
+export const Categories: React.FC = React.memo(() => {  
 	const dispatch = useAppDispatch();
 	const categoryId = useAppSelector(selectCategoryId);
 
@@ -31,4 +30,4 @@ export function Categories() {
 			</ul>
 		</div>
 	);
-}
+});
