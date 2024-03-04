@@ -3,8 +3,9 @@ import { CartEmpty } from "../components/CartEmpty";
 import { CartItem } from "../components/CartItem";
 import { useAppDispatch, useAppSelector } from "../redux/hookRTK";
 import { clearItemInCart, selectCartItems } from "../redux/slices/cartSlice";
+import React from 'react'
 
-export function Cart() {
+ const Cart =()=> {
 	const dispatch = useAppDispatch();
 
 	const { items, totalPrice } = useAppSelector(selectCartItems);
@@ -147,3 +148,6 @@ export function Cart() {
 		</div>
 	);
 }
+
+
+export default Cart

@@ -1,9 +1,11 @@
 import { NotFoundBlock } from "../components/NotFoundBlock";
 
-export function NotFound() {
+function NotFound() {
 	return (
 		<div className="container">
 			<NotFoundBlock />
 		</div>
 	);
 }
+
+export default NotFound

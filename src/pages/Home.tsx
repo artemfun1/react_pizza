@@ -17,9 +17,16 @@ import {
 } from "../redux/slices/filterSlice";
 import { selectPizzas, setPizzas } from "../redux/slices/pizzaSlice";
 
+
+
 export function Home() {
 	const isSearch = useRef(false);
 	const isMounted = useRef(false);
+
+	
+	import('../utils/math').then((math)=>{
+		console.log(math.add(16,26))
+	})
 
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
@@ -73,7 +80,7 @@ export function Home() {
 	// 	useMemo(() => {
 	// 		return <Categories />;
 	// 	},[]);
-
+ 
 	return (
 		<div className="container">
 			<div className="content__top">
