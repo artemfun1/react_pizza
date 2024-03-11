@@ -26,10 +26,10 @@ const NotFound = React.lazy(
 export function App() {
 	return (
 		<Routes>
-			<Route path="/" element={<MainLayout />}>
-				<Route path="" element={<Home />} />
+			<Route path="/react_pizza/" element={<MainLayout />}>
+				<Route path="/react_pizza/" element={<Home />} />
 				<Route
-					path="cart"
+					path="/react_pizza/cart"
 					element={
 						<Cart />
 						// <React.Suspense fallback={<div>Загрузка корзины...</div>}>
@@ -38,7 +38,7 @@ export function App() {
 					}
 				/>
 				<Route
-					path="pizza/:id"
+					path="/react_pizza/pizza/:id"
 					element={
 						<React.Suspense fallback={<div>Загрузка питсы...</div>}>
 							<FillPizza />

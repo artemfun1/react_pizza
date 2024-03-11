@@ -118,7 +118,7 @@ import React from 'react'
 					</div>
 					<div className="cart__bottom-buttons">
 						<Link
-							to="/"
+							to="/react_pizza/"
 							className="button button--outline button--add go-back-btn"
 						>
 							<svg

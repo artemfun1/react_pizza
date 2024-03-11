@@ -37,7 +37,7 @@ export function Search() {
 			</svg>
 
 			<input
-				onChange={(e: any) => onChangeInput(e)}
+				onChange={(e) => onChangeInput(e)}
 				value={value}
 				className={style.input}
 				placeholder="Поиск пиццы..."

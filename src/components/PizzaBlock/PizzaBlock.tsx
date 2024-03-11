@@ -48,7 +48,7 @@ export function PizzaBlock({
 	return (
 		<div className="pizza-block-wrapper">
 			<div className="pizza-block">
-				<Link to={`/pizza/${id}`}>
+				<Link to={`/react_pizza/pizza/${id}`}>
 					<img className="pizza-block__image" src={imageUrl} alt="Pizza" />
 				</Link>
 

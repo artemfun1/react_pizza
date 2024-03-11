@@ -24,7 +24,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 				setPizza(response.data[0]);
 			} catch (error) {
 				alert("Ошибка при получении питсы");
-				navigate("/");
+				navigate("/react_pizza/");
 			}
 		}
 		getPizza();
@@ -39,7 +39,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 			<img style={{ height: "200px" }} src={pizza.imageUrl} alt="pizza" />
 			<p>{pizza.title}</p>
 			<h4>{price} p</h4>
-			<Link to='/' ><button className='button button--outline button--add'>
+			<Link to='/react_pizza/' ><button className='button button--outline button--add'>
 				<span>Назад</span>
 			</button></Link>
 			

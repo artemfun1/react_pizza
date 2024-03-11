@@ -34,7 +34,7 @@ export function Header() {
 	return (
 		<div className="header">
 			<div className="container">
-				<Link to="/">
+				<Link to="/react_pizza/">
 					{/* <a href='http://localhost:3000/'> */}
 					<div onClick={() => handleClick()} className="header__logo">
 						<img width="38" src={logoSvg} alt="Pizza logo" />
@@ -50,7 +50,7 @@ export function Header() {
 					<>
 						<Search />
 						<div className="header__cart">
-							<Link to="/cart" className="button button--cart">
+							<Link to="/react_pizza/cart" className="button button--cart">
 								<span>{totalPrice} ₽</span>
 								<div className="button__delimiter"></div>
 								<svg
