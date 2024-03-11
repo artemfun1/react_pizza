@@ -46,7 +46,7 @@ export function Header() {
 					{/* </a> */}
 				</Link>
 
-				{pathname !== "/cart" && (
+				{pathname !== "/react_pizza/cart" && (
 					<>
 						<Search />
 						<div className="header__cart">
