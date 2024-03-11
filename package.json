@@ -1,5 +1,6 @@
 {
 	"name": "react_pizza",
+	"homepage": "https://artemfun1.github.io/react_pizza",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -17,6 +18,7 @@
 		"ahooks": "^3.7.10",
 		"axios": "^1.6.7",
 		"clsx": "^2.1.0",
+		"gh-pages": "^6.1.1",
 		"lodash.debounce": "^4.0.8",
 		"qs": "^6.11.2",
 		"react": "^18.2.0",
@@ -34,8 +36,11 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
+
 	},
 	"eslintConfig": {
 		"extends": [
