@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/332.047d3718.chunk.js","mappings":"yGAEO,SAASA,EAAIC,EAASC,GAE3B,OADAC,QAAQC,IAAI,KACLH,EAAEC,CACX,C","sources":["utils/math.ts"],"sourcesContent":["\n\nexport function add(a:number,b:number){\n  console.log(111)\n  return a+b\n}"],"names":["add","a","b","console","log"],"sourceRoot":""}
